@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
-"""Use mypy to validate the following piece
-of code and apply any necessary changes."""
+"""
+    Type checking
+"""
 from typing import Tuple, List
 
 
 def zoom_array(lst: Tuple, factor: int = 2) -> List:
-    """of code and apply any necessary changes."""
+    """Args: st: Tuple of numbers
+            factor: increase factor
+
+    Return: zoomed
+    """
     zoomed_in: List = [
         item for item in lst
         for i in range(factor)
@@ -13,7 +18,7 @@ def zoom_array(lst: Tuple, factor: int = 2) -> List:
     return zoomed_in
 
 
-array = [12, 72, 91]
+array = (12, 72, 91)
 
 zoom_2x = zoom_array(array)
 
