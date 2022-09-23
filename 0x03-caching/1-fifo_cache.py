@@ -1,24 +1,19 @@
 #!/usr/bin/env python3
-'''Create a class FIFOCache that inherits from
-BaseCaching and is a caching system:'''
+""" Python caching systems """
+
 from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    '''You can overload def __init__(self):
-    but don’t forget to call the parent init:
-    super().__init__()'''
+    """ FIFO caching system """
+
     def __init__(self):
-        '''init'''
+        ''' Initialize class instance. '''
         super().__init__()
         self.current_keys = []
 
     def put(self, key, item):
-        '''If the number of items in self.cache_data
-        is higher that BaseCaching.MAX_ITEMS: you must
-        discard the first item put in cache (FIFO algorithm)
-        you must print DISCARD: with the key discarded
-        and following by a new line'''
+        """ Add an item in the cache """
         if key is not None or item is not None:
             self.cache_data[key] = item
             if key not in self.current_keys:
@@ -29,7 +24,5 @@ class FIFOCache(BaseCaching):
                 print('DISCARD: {}'.format(discarded_key))
 
     def get(self, key):
-        '''Must return the value in self.cache_data
-        linked to key. If key is None or if the key
-        doesn’t exist in self.cache_data, return None.'''
+        """ Get an item by key """
         return self.cache_data.get(key)
