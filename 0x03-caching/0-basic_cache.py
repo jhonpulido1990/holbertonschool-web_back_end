@@ -20,7 +20,4 @@ class BasicCache(BaseCaching):
         '''Must return the value in self.cache_data
         linked to key. If key is None or if the key
         doesn’t exist in self.cache_data, return None.'''
-        valor = self.cache_data.get(key)
-        if valor:
-            return self.cache_data[key]
-        return None
+        return self.cache_data.get(key)
