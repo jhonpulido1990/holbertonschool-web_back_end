@@ -11,6 +11,7 @@ class FIFOCache(BaseCaching):
     def __init__(self):
         '''init'''
         super().__init__()
+        self.current_keys = []
 
     def put(self, key, item):
         '''If the number of items in self.cache_data
@@ -18,12 +19,14 @@ class FIFOCache(BaseCaching):
         discard the first item put in cache (FIFO algorithm)
         you must print DISCARD: with the key discarded
         and following by a new line'''
-        if key or item:
+        if key is not None or item is not None:
             self.cache_data[key] = item
-            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                keyse = list(self.cache_data.keys())[0]
-                del self.cache_data[keyse]
-                print('DISCARD: {}'.format(keyse))
+            if key not in self.current_keys:
+                self.current_keys.append(key)
+            if len(self.current_keys) > BaseCaching.MAX_ITEMS:
+                discarded_key = self.current_keys.pop(0)
+                del self.cache_data[discarded_key]
+                print('DISCARD: {}'.format(discarded_key))
 
     def get(self, key):
         '''Must return the value in self.cache_data
