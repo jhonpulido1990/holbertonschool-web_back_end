@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
-'''Copy index_range from the previous task and the
-following class into your code'''
+'''
+Module that returns the list of results for a given page
+'''
 import csv
 import math
 from typing import List, Tuple, Dict
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    '''The function should return a tuple of size two containing
-    a start index and an end index corresponding to the range of
-    indexes to return in a list for those particular pagination parameters.'''
+    '''
+    Simple helper function to pagination
+
+    @page: the page number
+    @page_size: the amount of results per page
+    Return: a tuple of the starting and end indexes for that page
+    '''
+    start = (page - 1) * page_size
     end = page * page_size
-    start = end - page_size
     return (start, end)
 
 
@@ -35,39 +40,42 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        '''Use assert to verify that both arguments are integers greater
-        than 0. Use index_range to find the correct indexes to paginate
-        the dataset correctly and return the appropriate page of the
-        dataset (i.e. the correct list of rows).'''
-        assert isinstance(page_size, int) and isinstance(page, int)
-        assert (page > 0 and page_size > 0)
-        self.dataset()
-        res = index_range(page, page_size)
-        return self.__dataset[res[0]:res[1]]
+        '''
+        Gets the results per page of the given page
+        '''
+        assert type(page) == int and page > 0
+        assert type(page_size) == int and page_size > 0
+        page_list = []
+        results = self.dataset()
+        indexes = index_range(page, page_size)
+        try:
+            for i in range(indexes[0], indexes[1]):
+                page_list.append(results[i])
+        except IndexError:
+            pass
+        return page_list
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
-        '''Implement a get_hyper method that takes the same arguments
-        (and defaults) as get_page and returns a dictionary
-        containing the following key-value pairs:
-        page_size: the length of the returned dataset page
-        page: the current page number
-        data: the dataset page (equivalent to return from previous task)
-        next_page: number of the next page, None if no next page
-        prev_page: number of the previous page, None if no previous page
-        total_pages: the total number of pages in the dataset as an integer'''
-        diction = {}
-        data = self.get_page(page, page_size)
-        totality = math.ceil(len(self.__dataset) / page_size)
-        previu = page - 1
-        next_page = page + 1
-        if next_page > totality:
-            next_page = None
-        if previu < 1:
-            previu = None
-        diction['page_size'] = len(self.get_page(page, page_size))
-        diction['page'] = page
-        diction['data'] = data
-        diction['next_page'] = next_page
-        diction['prev_page'] = previu
-        diction['total_page'] = totality
-        return diction
+        '''
+        Gets the results per page of the given page and returns a dictionary
+        '''
+        hyper_dict = {}
+        page_list = self.get_page(page, page_size)
+        act_page_size = len(page_list)
+        total_pages = math.ceil(len(self.dataset()) / page_size)
+        if page < total_pages:
+            nextp = page + 1
+        else:
+            nextp = None
+
+        if page != 1:
+            prev = page - 1
+        else:
+            prev = None
+        hyper_dict["page_size"] = act_page_size
+        hyper_dict["page"] = page
+        hyper_dict["data"] = page_list
+        hyper_dict["next_page"] = nextp
+        hyper_dict["prev_pages"] = prev
+        hyper_dict["total_pages"] = total_pages
+        return hyper_dict
