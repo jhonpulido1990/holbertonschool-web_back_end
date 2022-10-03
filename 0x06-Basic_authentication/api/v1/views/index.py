@@ -6,7 +6,7 @@ from api.v1.views import app_views
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
-def status() -> str:
+def status() -> None:
     """ GET /api/v1/status
     Return:
       - the status of the API
@@ -14,7 +14,7 @@ def status() -> str:
     return jsonify({"status": "OK"})
 
 @app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
-def unauthorized() -> str:
+def unauthorized() -> None:
     """ GET /api/v1/unauthorized
     This endpoint must raise a 401 error 
     Return:
