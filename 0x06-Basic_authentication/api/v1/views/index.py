@@ -16,7 +16,7 @@ def status() -> None:
 @app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
 def unauthorized() -> None:
     """ GET /api/v1/unauthorized
-    This endpoint must raise a 401 error 
+    This endpoint must raise a 401 error
     Return:
       - {"error": "Unauthorized"}
     """
@@ -25,7 +25,7 @@ def unauthorized() -> None:
 @app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
 def forbidden() -> str:
     """ GET /api/v1/unauthorized
-    This endpoint must raise a 403 error 
+    This endpoint must raise a 403 error
     Return:
       - {"error": "Forbidden"}
     """
