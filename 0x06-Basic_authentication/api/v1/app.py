@@ -21,15 +21,13 @@ if AUTH_TYPE == 'auth':
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
-    """ Error authorized
-    """
+    """ error handler for (unauthorized) 401 status code """
     return jsonify({"error": "Unauthorized"}), 401
 
 
 @app.errorhandler(403)
 def forbidden(error) -> str:
-    """ Forbidden request handler
-    """
+    """ error handler for (forbidden) 403 status code """
     return jsonify({"error": "Forbidden"}), 403
 
 
