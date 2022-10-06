@@ -25,6 +25,8 @@ class SessionAuth(Auth):
         return seccion_id
 
     def user_id_for_session_id(self, session_id: str = None) -> str:
+        '''storing and retrieving a link between a User ID
+        and a Session ID.'''
         if session_id is None and isinstance(session_id, str) is False:
             return None
         return self.user_id_by_session_id.get(session_id)
