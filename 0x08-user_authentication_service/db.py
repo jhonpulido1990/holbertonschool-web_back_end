@@ -32,3 +32,50 @@ class DB:
         self._session.add(user)
         self._session.commit()
         return user
+
+    def find_user_by(self, **kwargs) -> User:
+        """ This method takes in arbitrary keyword arguments and
+        returns the first row found in the users table as
+        filtered by the method’s input arguments. No validation
+        of input arguments required at this point. """
+        if not kwargs:
+            raise InvalidRequestError
+        users_columns = [
+            'id',
+            'email',
+            'hashed_password',
+            'session_id',
+            'reset_token'
+        ]
+        for arg in kwargs:
+            if arg not in users_columns:
+                raise InvalidRequestError
+        
+        """ search table for user """
+        search_user = self.__session.query(User).filter_by(**kwargs).first()
+
+        if search_user:
+            return search_user
+        else:
+            raise NoResultFound
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """ Finds user record and updates attributes """
+
+        user_to_update = self.find_user_by(id=user_id)
+
+        users_columns = [
+            'id',
+            'email',
+            'hashed_password',
+            'session_id',
+            'reset_token'
+            ]
+
+        for k, v in kwargs.items():
+            if k in users_columns:
+                setattr(user_to_update, k, v)
+            else:
+                raise ValueError
+
+        self._session.commit()
