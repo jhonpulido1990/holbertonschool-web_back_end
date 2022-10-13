@@ -18,7 +18,6 @@ def index() -> str:
     """
     return jsonify({"message": "Bienvenue"})
 
-
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def users() -> str:
     """ POST /users
@@ -48,7 +47,6 @@ def users() -> str:
             })
         except ValueError:
             return jsonify({"message": "email already registered"}), 400
-
 
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login() -> str:
@@ -81,7 +79,6 @@ def login() -> str:
 
             return response
 
-
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout() -> None:
     """ DELETE /sessions
@@ -97,7 +94,6 @@ def logout() -> None:
             return redirect(url_for('index'))
     else:
         abort(403)
-
 
 @app.route('/profile', methods=['GET'], strict_slashes=False)
 def profile() -> str:
@@ -118,7 +114,6 @@ def profile() -> str:
             abort(403)
     else:
         abort(403)
-
 
 @app.route('/reset_password', methods=['POST'], strict_slashes=False)
 def get_reset_password_token() -> str:
@@ -144,7 +139,6 @@ def get_reset_password_token() -> str:
             }), 200
         except ValueError:
             abort(403)
-
 
 @app.route('/reset_password', methods=['PUT'], strict_slashes=False)
 def update_password() -> str:
