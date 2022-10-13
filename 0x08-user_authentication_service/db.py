@@ -50,7 +50,7 @@ class DB:
         for arg in kwargs:
             if arg not in users_columns:
                 raise InvalidRequestError
- 
+
         """ search table for user """
         search_user = self.__session.query(User).filter_by(**kwargs).first()
 
