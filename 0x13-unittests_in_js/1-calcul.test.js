@@ -33,8 +33,8 @@ describe('calculateNumber', function () {
   });
 
   describe('Subtract two integers', function () {
-    it('should return 1', function () {
-      assert.strictEqual(calculateNumber('SUBTRACT', 2, 3), 1);
+    it('should return -1', function () {
+      assert.strictEqual(calculateNumber('SUBTRACT', 2, 3), -1);
     });
   });
 
@@ -45,8 +45,8 @@ describe('calculateNumber', function () {
   });
 
   describe('Subtract two float', function () {
-    it('should return -4', function () {
-      assert.strictEqual(calculateNumber('SUBTRACT', 6.6, 3.2), -4);
+    it('should return 4', function () {
+      assert.strictEqual(calculateNumber('SUBTRACT', 6.6, 3.2), 4);
     });
   });
 
