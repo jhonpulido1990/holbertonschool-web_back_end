@@ -1,4 +1,4 @@
-module.exports = Utils = {
+const Utils = {
   calculateNumber ( type, a, b) {
   if (type === 'SUM') {
     return Math.round(a) + Math.round(b);
@@ -10,5 +10,7 @@ module.exports = Utils = {
     if (b === 0) return 'Error';
     return Math.round(a) / Math.round(b);
   }
-}
+},
 };
+
+module.exports = Utils;
