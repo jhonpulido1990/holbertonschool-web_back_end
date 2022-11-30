@@ -16,7 +16,7 @@ describe('calculateNumber type === SUBTRACT', () => {
 describe('calculateNumber type === DIVIDE', () => {
   it('Divide', () => {
     assert.strictEqual(calculateNumber('DIVIDE', 1.4, 4.5), 0.2)
-  })
+  });
 });
 
 describe('calculateNumber', function() {
