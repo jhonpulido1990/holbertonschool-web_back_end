@@ -1,4 +1,4 @@
-module.exports = calculateNumber = ( type, a, b) => {
+const calculateNumber = ( type, a, b) => {
   if (type === 'SUM') {
     return Math.round(a) + Math.round(b);
   }
@@ -10,3 +10,5 @@ module.exports = calculateNumber = ( type, a, b) => {
     return Math.round(a) / Math.round(b);
   }
 }
+
+module.exports = calculateNumber;
