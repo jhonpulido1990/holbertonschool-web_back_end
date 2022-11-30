@@ -1,12 +1,18 @@
-module.exports = function calculateNumber ( type, a, b) {
-  if (type === 'SUM') {
-    return Math.round(a) + Math.round(b);
-  }
-  if (type === 'SUBTRACT') {
-    return Math.round(b) - Math.round(a);
-  }
+function calculateNumber(type, a, b) {
+  const roundA = Math.round(a);
+  const roundB = Math.round(b);
+
   if (type === 'DIVIDE') {
-    if (b === 0) return 'Error';
-    return Math.round(a) / Math.round(b);
+    if (roundB === 0) {
+      return 'Error';
+    }
+    return roundA / roundB;
   }
+
+  if (type === 'SUBTRACT') {
+    return roundA - roundB;
+  }
+
+  return roundA + roundB;
 }
+module.exports = calculateNumber;
